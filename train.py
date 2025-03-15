@@ -26,7 +26,7 @@ train_dataset = dataset.select_columns(["messages", "ground_truth"]).rename_colu
     {"messages": "prompt"}
 )
 
-num_gpus = 1
+num_gpus = 2
 run_name = "ifeval_" + model_name.split("/")[-1].lower()
 
 training_args = GRPOConfig(
@@ -44,7 +44,8 @@ training_args = GRPOConfig(
     beta=0.04,
     max_prompt_length=1024,
     max_completion_length=1024,
-    per_device_train_batch_size=4,
+    # per_device_train_batch_size=4,
+    per_device_train_batch_size=32,
     num_generations=(2 * num_gpus - 2 if num_gpus > 1 else 2),
     gradient_accumulation_steps=int(16 / num_gpus),
     gradient_checkpointing=True,
