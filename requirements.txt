@@ -1,0 +1,5 @@
+trl @ git+https://github.com/huggingface/trl.git
+vllm>=0.7.3
+deepspeed
+accelerate
+wandb
