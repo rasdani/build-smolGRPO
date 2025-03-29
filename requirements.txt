@@ -1,4 +1,4 @@
-trl @ git+https://github.com/huggingface/trl.git
+trl==0.16.0
 vllm>=0.7.3
 deepspeed
 accelerate

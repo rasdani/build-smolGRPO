@@ -17,7 +17,8 @@ def if_reward(completions, ground_truth, **kwargs):
     return rewards
 
 
-model_name = "HuggingFaceTB/SmolLM2-135M-Instruct"
+# model_name = "HuggingFaceTB/SmolLM2-135M-Instruct"
+model_name = "Qwen/Qwen2.5-0.5B-Instruct"
 model = AutoModelForCausalLM.from_pretrained(model_name)
 # tokenizer = AutoTokenizer.from_pretrained(model_name)
 
@@ -41,16 +42,17 @@ training_args = GRPOConfig(
     adam_beta2=0.99,
     max_grad_norm=0.1,
     num_iterations=1,
-    beta=0.04,
+    # beta=0.04,
+    beta=0.001,
     max_prompt_length=1024,
     max_completion_length=1024,
-    # per_device_train_batch_size=4,
-    per_device_train_batch_size=32,
+    per_device_train_batch_size=4,
+    # per_device_train_batch_size=32,
     # per_device_train_batch_size=16,
-    # num_generations=(2 * num_gpus - 2 if num_gpus > 1 else 2),
-    num_generations=8,
-    # gradient_accumulation_steps=int(16 / num_gpus),
-    gradient_accumulation_steps=2,
+    num_generations=(2 * num_gpus - 2 if num_gpus > 1 else 2),
+    # num_generations=8,
+    gradient_accumulation_steps=int(16 / num_gpus),
+    # gradient_accumulation_steps=2,
     gradient_checkpointing=True,
     save_strategy="steps",
     # save_steps=100,
